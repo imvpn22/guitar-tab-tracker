@@ -37,7 +37,7 @@ export default new Router({
       component: CreateSong
     },
     {
-      path: '/song/:songId',
+      path: '/songs/:songId',
       name: 'song',
       component: ViewSong
     }

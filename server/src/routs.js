@@ -14,10 +14,6 @@ module.exports = (app) => {
     SongsController.index)
   app.post('/songs',
     SongsController.post)
-
-  app.get('/status', (req, res) => {
-    res.send({
-      message: 'Server is running successfully!'
-    })
-  })
+  app.get('/songs/:songId',
+    SongsController.show)
 }
