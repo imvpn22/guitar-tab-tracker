@@ -1,16 +1,12 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
-
+      <panel title="Login">
         <div class="pl-4 pr-4 pt-4 pb-4">
-
           <form
             name="login-form"
             autocomplete="on">
+
             <!-- <i class="material-icons">email</i> -->
             <v-text-field
               autofocus
@@ -38,13 +34,13 @@
             </v-btn>
           </form>
         </div>
-
-      </div>
+      </panel>
     </v-flex>
   </v-layout>
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   name: 'hello',
   data () {
@@ -67,6 +63,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>

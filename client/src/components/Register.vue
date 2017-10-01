@@ -1,50 +1,45 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Register</v-toolbar-title>
-        </v-toolbar>
-
+      <panel title="Register">
         <div class="pl-4 pr-4 pt-4 pb-4">
           <form
-          name="register-form"
-          autocomplete="off">
-          <!-- <i class="material-icons">email</i> -->
-          <v-text-field
-          name="email"
-          label="Email"
-          autofocus
-          v-model="email">
-        </v-text-field>
+            name="register-form"
+            autocomplete="off">
+            <v-text-field
+              name="email"
+              label="Email"
+              autofocus
+              v-model="email">
+            </v-text-field>
 
-        <!-- <i class="material-icons">lock</i> -->
-        <v-text-field
-        name="password"
-        label="Password"
-        type="password"
-        autocomplete="new-password"
-        v-model="password">
-      </v-text-field>
+            <v-text-field
+              name="password"
+              label="Password"
+              type="password"
+              autocomplete="new-password"
+              v-model="password">
+            </v-text-field>
 
-      <div class="error" v-html="error" />
-      <br>
+            <div class="error" v-html="error" />
+            <br>
 
-      <v-btn
-      dark
-      class="cyan"
-      @click="register">
-      Register
-    </v-btn>
-  </form>
-</div>
-
-</div>
-</v-flex>
-</v-layout>
+            <v-btn
+              dark
+              class="cyan"
+              @click="register">
+              Register
+            </v-btn>
+          </form>
+        </div>
+      </panel>
+    </v-flex>
+  </v-layout>
 </template>
+
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   name: 'hello',
   data () {
@@ -73,6 +68,9 @@ export default {
   },
   mounted () {
     // can mount a function if somthing changes
+  },
+  components: {
+    Panel
   }
 }
 </script>
