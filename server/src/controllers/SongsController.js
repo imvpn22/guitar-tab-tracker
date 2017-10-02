@@ -13,7 +13,7 @@ module.exports = {
 			})
 		}
 	},
-	async post (req, res) {
+	async insert (req, res) {
 		try {
 			const song = await Song.create(req.body)
 			res.send(song)
@@ -27,10 +27,26 @@ module.exports = {
 		try {
 			const song = await Song.findById(req.params.songId)
 			res.send(song)
+			//console.log(song)
 		} catch (err) {
 			res.status(500).send({
-				error: 'Error: cannot fetch info of requested song!'
+				error: 'Error: cannot show info of requested song!'
 			})
 		}
 	},
+	async update (req, res) {
+		try {
+			const song = await Song.update(req.body, {
+				where: {
+					id: req.params.songId
+				}
+			})
+			res.send(song)
+			//console.log('SOng ID: ', req.params.songId)
+		} catch (err) {
+			res.status(500).send({
+				error: 'Error: cannot update info of requested song!'
+			})
+		}
+	}
 }
