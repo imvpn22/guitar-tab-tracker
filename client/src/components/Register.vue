@@ -39,7 +39,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
+
 export default {
   name: 'hello',
   data () {
@@ -70,7 +70,7 @@ export default {
     // can mount a function if somthing changes
   },
   components: {
-    Panel
+
   }
 }
 </script>

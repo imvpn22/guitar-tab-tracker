@@ -1,7 +1,5 @@
 <template>
-  <v-layout>
-    <v-flex xs6 offset-xs3>
-      <panel title="Songs">
+  <panel title="Songs">
         <v-btn
           @click="navigateTo({name: 'songs-create'})"
           slot="action"
@@ -51,30 +49,31 @@
 
       </div>
   </panel>
-</v-flex>
-</v-layout>
 </template>
 
 <script>
 import SongsService from '@/services/SongsService'
-import Panel from '@/components/Panel'
 export default {
   components: {
-    Panel
+
   },
   data () {
     return {
       songs: null
     }
   },
-  async mounted () {
-    // do a request to backend for all the songs
-    this.songs = (await SongsService.index()).data
-    // console.log('songs', this.songs)
-  },
   methods: {
     navigateTo (route) {
       this.$router.push(route)
+    }
+  },
+  watch: {
+    // Request backend to search the query
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.songs = (await SongsService.index(value)).data
+      }
     }
   }
 }

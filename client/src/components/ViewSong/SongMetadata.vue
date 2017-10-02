@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
+
 export default {
   props: [
     'song'
@@ -45,7 +45,7 @@ export default {
     }
   },
   components: {
-    Panel
+
   }
 }
 </script>
