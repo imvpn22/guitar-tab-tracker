@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .song {
   padding:  20px;
   overflow: hidden;
