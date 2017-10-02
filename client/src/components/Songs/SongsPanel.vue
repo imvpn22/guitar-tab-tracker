@@ -1,7 +1,9 @@
 <template>
   <panel title="Songs">
         <v-btn
-          @click="navigateTo({name: 'songs-create'})"
+          :to="{
+            name: 'songs-create'
+          }"
           slot="action"
           fab
           dark
@@ -35,12 +37,12 @@
             <v-btn
               dark
               class="cyan"
-              @click="navigateTo({
+              :to="{
                 name: 'song',
                 params: {
                   songId: song.id
                 }
-              })">
+              }">
               View
             </v-btn>
           </v-flex>
@@ -63,9 +65,7 @@ export default {
     }
   },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
+
   },
   watch: {
     // Request backend to search the query
