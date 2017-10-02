@@ -64,9 +64,6 @@ export default {
       songs: null
     }
   },
-  methods: {
-
-  },
   watch: {
     // Request backend to search the query
     '$route.query.search': {
@@ -75,6 +72,9 @@ export default {
         this.songs = (await SongsService.index(value)).data
       }
     }
+  },
+  methods: {
+
   }
 }
 </script>

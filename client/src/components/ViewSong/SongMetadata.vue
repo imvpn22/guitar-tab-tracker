@@ -30,19 +30,81 @@
           }">
           Edit
         </v-btn>
+
+        <v-btn
+          v-if="isUserLoggedIn && !bookmark"
+          dark
+          class="cyan"
+          @click="setAsBookmark">
+          Set As Bookmark
+        </v-btn>
+
+        <v-btn
+          v-if="isUserLoggedIn && bookmark"
+          dark
+          class="cyan"
+          @click="unsetAsBookmark">
+          Un-Set As Bookmark
+        </v-btn>
       </v-flex>
     </v-layout>
   </panel>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import BookmarkService from '@/services/BookmarkService'
 
 export default {
   props: [
     'song'
   ],
-  methods: {
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  data () {
+    return {
+      bookmark: null
+    }
+  },
+  watch: {
+    async song () {
+      if (!this.isUserLoggedIn) {
+        return
+      }
 
+      try {
+        this.bookmark = (await BookmarkService.index({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })).data
+        console.log('bookmark: ', this.bookmark)
+      } catch (err) {
+        console.error('Error: On checking bookmark!', err)
+      }
+    }
+  },
+  methods: {
+    async setAsBookmark () {
+      try {
+        this.bookmark = (await BookmarkService.post({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })).data
+      } catch (err) {
+        console.error('Error: cannot bookmark!', err)
+      }
+    },
+    async unsetAsBookmark () {
+      try {
+        await BookmarkService.delete(this.bookmark.id)
+        this.bookmark = null
+      } catch (err) {
+        console.error('Error: cannot bookmark!', err)
+      }
+    }
   },
   components: {
 
