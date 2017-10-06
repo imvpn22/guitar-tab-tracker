@@ -61,7 +61,8 @@ export default {
   ],
   computed: {
     ...mapState([
-      'isUserLoggedIn'
+      'isUserLoggedIn',
+      'user'
     ])
   },
   data () {
@@ -76,10 +77,15 @@ export default {
       }
 
       try {
-        this.bookmark = (await BookmarkService.index({
+        const bookmarks = (await BookmarkService.index({
           songId: this.song.id,
-          userId: this.$store.state.user.id
+          userId: this.user.id
         })).data
+
+        if (bookmarks.length) {
+          this.bookmark = bookmarks[0]
+        }
+
         console.log('bookmark: ', this.bookmark)
       } catch (err) {
         console.error('Error: On checking bookmark!', err)
@@ -91,7 +97,7 @@ export default {
       try {
         this.bookmark = (await BookmarkService.post({
           songId: this.song.id,
-          userId: this.$store.state.user.id
+          userId: this.user.id
         })).data
       } catch (err) {
         console.error('Error: cannot bookmark!', err)

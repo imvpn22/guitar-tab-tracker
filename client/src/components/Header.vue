@@ -13,7 +13,6 @@
 
     <v-toolbar-items>
       <v-btn
-        v-if="!$store.state.isUserLoggedIn"
         flat
         dark
         :to="{
